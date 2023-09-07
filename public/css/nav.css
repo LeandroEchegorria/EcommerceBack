@@ -1,0 +1,199 @@
+/* CSS extraído para las clases de TailwindCSS */
+.text-gray-600 {
+    color: #718096;
+  }
+  
+  .body-font {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+  
+  .container {
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .p-5 {
+    padding: 1.25rem;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .md\:flex-row {
+    flex-direction: row;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .md\:mb-0 {
+    margin-bottom: 0;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .title-font {
+    font-family: inherit;
+  }
+  
+  .text-gray-900 {
+    color: #1a202c;
+  }
+  
+  .md\:mr-auto {
+    margin-right: auto;
+  }
+  
+  .md\:ml-4 {
+    margin-left: 1rem;
+  }
+  
+  .md\:py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .md\:pl-4 {
+    padding-left: 1rem;
+  }
+  
+  .md\:border-l {
+    border-left-width: 1px;
+  }
+  
+  .md\:border-gray-400 {
+    border-color: #cbd5e0;
+  }
+  
+  .text-base {
+    font-size: 1rem;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .hover\:text-gray-900:hover {
+    color: #2d3748;
+  }
+  
+  .inline-flex {
+    display: inline-flex;
+  }
+  
+  .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .focus\:outline-none:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .hover\:bg-gray-200:hover {
+    background-color: #edf2f7;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  .md\:mt-0 {
+    margin-top: 0;
+  }
+  
+  /* Estilos específicos para los iconos SVG */
+  .w-10 {
+    width: 2.5rem;
+  }
+  
+  .h-10 {
+    height: 2.5rem;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .bg-indigo-500 {
+    background-color: #667eea;
+  }
+  
+  .w-4 {
+    width: 1rem;
+  }
+  
+  .h-4 {
+    height: 1rem;
+  }
+  
+  .ml-1 {
+    margin-left: 0.25rem;
+  }
+  
+  /* Estilos de trazos para los iconos SVG */
+  .stroke-current {
+    stroke: currentColor;
+  }
+  
+  .stroke-2 {
+    stroke-width: 2;
+  }
+  
+  .stroke-linecap-round {
+    stroke-linecap: round;
+  }
+  
+  .stroke-linejoin-round {
+    stroke-linejoin: round;
+  }
+  
+  /* Estilos adicionales personalizados para el botón */
+  .border-0 {
+    border: 0;
+  }
+  
+  .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  

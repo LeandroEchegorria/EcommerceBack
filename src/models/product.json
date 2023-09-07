@@ -1,0 +1,52 @@
+[
+  {
+    "title": "arvejas",
+    "description": "verdes",
+    "price": 1000,
+    "category": "Enlatados",
+    "code": "ENL324",
+    "stock": 213,
+    "id": 3,
+    "status": true
+  },
+  {
+    "title": "Leche",
+    "description": "Entera , larga vida",
+    "price": 2000,
+    "category": "Lacteos",
+    "code": "LAC841",
+    "stock": 10,
+    "id": 4,
+    "status": true
+  },
+  {
+    "title": "Choclo",
+    "description": "en lata",
+    "category": "Enlatados",
+    "price": "1800",
+    "stock": "2",
+    "code": "ENL931",
+    "status": true,
+    "id": 5
+  },
+  {
+    "title": "Manteca",
+    "description": "100g",
+    "category": "Lacteos",
+    "price": "2330",
+    "stock": "13",
+    "code": "LAC901",
+    "status": true,
+    "id": 6
+  },
+  {
+    "title": "lele",
+    "description": "lea",
+    "category": "le",
+    "price": "1000",
+    "stock": "5",
+    "code": "LEA001",
+    "status": true,
+    "id": 7
+  }
+]
