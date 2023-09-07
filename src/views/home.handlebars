@@ -1,0 +1,32 @@
+<hr>
+<h1>Listado de Productos</h1>
+<hr>
+{{#each productos}}
+    <div id="productos">
+            <p>{{this.title}} 
+                {{this.description}} 
+                {{this.price}} 
+                {{this.category}} 
+                {{this.stock}} 
+                {{this.code}} 
+                {{this.status}}
+            </p>
+            <hr>
+
+    </div>
+{{/each}}
+
+{{!-- {{#each productos}}
+    <div id="productos">
+            <h3>Nombre: {{this.title}}</h3> 
+            <p> Descripcion: {{this.description}}</p>  
+            <p>Precio: {{this.price}}</p> 
+            <p> Categoria: {{this.category}}</p> 
+            <p>Stock: {{this.stock}}</p>
+            <p>Codigo: {{this.code}}</p>  
+            <p>Status: {{this.status}}</p>
+            <hr>
+
+    </div>
+{{/each}}
+ --}}

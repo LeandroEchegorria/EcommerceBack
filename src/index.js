@@ -1,6 +1,4 @@
 import express from 'express';
-//import routerProd from './routes/product.routes.js';
-//import routerCart from './routes/cart.routes.js';
 import { __dirname } from './path.js'
 import path from 'path';
 import { engine } from 'express-handlebars';
@@ -8,6 +6,7 @@ import { Server } from 'socket.io'
 //import { ProductManager } from './controllers/productManager.js';
 import mongoose from 'mongoose';
 import productRouter from './routes/products.routes.js';
+import cartRouter from './routes/carts.routes.js';
 
 const app = express()
 const PORT = 8080
@@ -23,8 +22,6 @@ const server = app.listen(PORT, ()=> {
 })
 const io = new Server(server)
 
-//Product Manager (deprecado)
-//const ProductManagerSocket = new ProductManager('./src/models/product.json')
 
 //middlewares
 app.use(express.json())
@@ -37,8 +34,9 @@ app.set('views', path.resolve(__dirname, './views'))
 //Routes
 app.use('/static', express.static(path.join(__dirname, '/public')))
 app.use('/api/product', productRouter)
+app.use('/api/carts', cartRouter)   
+//app.use('/api/carts', cartRouter)   
 
-//app.use('/api/carts', routerCart)    //aca va el nuevo cartRouter 
 app.get('/', (req,res)=> {
   res.send("Bienvenido")
 })
