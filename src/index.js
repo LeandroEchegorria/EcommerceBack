@@ -17,6 +17,7 @@ const app = express()
 const PORT = 8080
 const mongoURL = 'mongodb+srv://leandroechegorria:Leandro87@leandro.qvdfttf.mongodb.net/'
 
+//Conexion BD
 mongoose.connect(mongoURL)
   .then(() => console.log("DB conectada"))
   .catch((error) => console.log("Error en conexion a MongoDB Atlas: ", error))
@@ -52,14 +53,12 @@ app.get('/', (req,res)=> {
 //HBS
 app.get('/static', async (req,res) => {
 
-  const prods = await ProductManagerSocket.getProducts()
-
   res.render('home', { 
     //se mostraran los productos utilizando HBS
     titulo: "Products",
     rutaCSS: "home",
     rutaJS: "home",
-    productos: prods 
+    
 
   })
 })
@@ -77,8 +76,22 @@ app.get('/static/chat', (req, res) => {
 	res.render('chat', {
 		rutaCSS: 'chat',
 		rutaJS: 'chat',
-	});
-});
+	})
+})
+
+app.get('/static/products', (req, res) => {
+	res.render('products', {
+		rutaCSS: 'products',
+		rutaJS: 'products',
+	})
+})
+
+app.get('/static/carts/:cid', (req, res) => {
+	res.render('carts', {
+		rutaCSS: 'carts',
+		rutaJS: 'carts',
+	})
+})
 
 
 
@@ -88,13 +101,58 @@ io.on("connection", (socket) => {
 
   socket.on('nuevoProducto', async(prod) => {
     await productModel.create(prod)
-    
     socket.emit("mensajeProductoCreado", "El producto se creo correctamente")
   })
+
   socket.on('productos', async() => {
     const prods = await productModel.find()
     socket.emit('getProducts', prods)
   })
+
+	socket.on('load', async () => {
+		const data = await productModel.paginate({}, { limit: 5 })
+		socket.emit('products', data)
+	})
+
+  socket.on('previousPage', async page => {
+		const data = await productModel.paginate({}, { limit: 5, page: page })
+		socket.emit('products', data)
+	})
+
+	socket.on('nextPage', async page => {
+		const data = await productModel.paginate({}, { limit: 5, page: page })
+		socket.emit('products', data)
+	})
+
+  socket.on('addProduct', async data => {
+		const { pid, cartId } = data
+		if (cartId) {
+			const cart = await cartModel.findById(cartId)
+			const productExists = cart.products.find(prod => prod.id_prod == pid)
+			productExists
+				? productExists.quantity++
+				: cart.products.push({ id_prod: pid, quantity: 1 })
+			await cart.save()
+			socket.emit('success', cartId)
+		} else {
+			const cart = await cartModel.create({})
+			cart.products.push({ id_prod: pid, quantity: 1 })
+			await cart.save()
+			socket.emit('success', cart._id.toString())
+		}
+	})
+
+  socket.on('loadCart', async cid => {
+		const cart = await cartModel.findById(cid)
+		socket.emit('cartProducts', cart.products)
+	})
+
+  socket.on('newProduct', async product => {
+		await productModel.create(product)
+		const products = await productModel.find()
+		socket.emit('products', products)
+	})
+
 
 
   socket.on('mensaje', async info => {
@@ -105,7 +163,7 @@ io.on("connection", (socket) => {
     })
     const messages = await messageModel.find()
 
-    io.emit('mensajes', messages)
+    socket.emit('mensajes', messages)
   })
 
 })

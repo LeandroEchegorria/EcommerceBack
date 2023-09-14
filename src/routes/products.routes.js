@@ -4,19 +4,33 @@ import productModel from "../models/products.models.js"
 const productRouter = Router()
 
 productRouter.get('/', async (req, res)=>{
-    const {limit} = req.query
-    try {
-        const prods = await productModel.find().limit(limit)
-        res.status(200).send({resultado: 'Ok', message: prods})
-    } catch (error) {
-        res.status(400).send({error: `Error al consultar productos: ${error}`})
-    }
+    const {limit, page, sort, category, status} = req.query
+    let sortOption
+	sort == 'asc' && (sortOption = 'price')
+	sort == 'desc' && (sortOption = '-price')
+
+	const options = {
+		limit: limit || 10,
+		page: page || 1,
+		sort: sortOption || null,
+	}
+
+	const query = {}
+	category && (query.category = category)
+	status && (query.status = status)
+
+	try {
+		const prods = await productModel.paginate(query, options)
+		res.status(200).send({ resultado: 'OK', message: prods })
+	} catch (error) {
+		res.status(400).send({ error: `Error al consultar productos: ${error}` })
+	}
 })
 
-productRouter.get('/:id', async (req, res)=>{
-    const {id} = req.params
+productRouter.get('/:pid', async (req, res)=>{
+    const {pid} = req.params
     try {
-        const prod = await productModel.findById(id)
+        const prod = await productModel.findById(pid)
         if (prod) {
             res.status(200).send({resultado: 'Ok', message: prod})
         } else {
@@ -34,17 +48,16 @@ productRouter.post('/', async (req, res)=>{
             title, description, stock, code, price, category
         })
         res.status(200).send({resultado: 'Ok', message: respuesta})
-
     } catch (error) {
         res.status(400).send({error: `Error al crear producto: ${error}`})
     }
 })
 
-productRouter.put('/:id', async (req, res)=>{
-    const {id} = req.params
+productRouter.put('/:pid', async (req, res)=>{
+    const {pid} = req.params
     const { title, description, stock, code, price, category, status} = req.body
     try {
-        const respuesta = await productModel.findByIdAndUpdate(id, {title, description, stock, code, price, category, status})
+        const respuesta = await productModel.findByIdAndUpdate(pid, {title, description, stock, code, price, category, status})
         if (respuesta) {
             res.status(200).send({resultado: 'Ok', message: respuesta})
         } else {
@@ -55,10 +68,10 @@ productRouter.put('/:id', async (req, res)=>{
     }
 })
 
-productRouter.delete('/:id', async (req, res)=>{
-    const {id} = req.params
+productRouter.delete('/:pid', async (req, res)=>{
+    const {pid} = req.params
     try {
-        const respuesta = await productModel.findByIdAndDelete(id)
+        const respuesta = await productModel.findByIdAndDelete(pid)
         if (respuesta) {
             res.status(200).send({resultado: 'Ok', message: respuesta})
         } else {

@@ -2,6 +2,8 @@ const socket = io()
 
 const form = document.getElementById('formProduct')
 
+socket.emit('load')
+
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     const datForm = new FormData(e.target) //El formulario que disparo el evento
